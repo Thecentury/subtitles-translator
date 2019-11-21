@@ -4,8 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using MoreLinq;
 using SubtitlesParser.Classes;
+using SubtitlesTranslator.Configuration;
+using SubtitlesTranslator.YandexApi;
 
 namespace SubtitlesTranslator
 {
@@ -13,9 +16,29 @@ namespace SubtitlesTranslator
     {
         private static async Task<int> Main(string[] args)
         {
-            var cfg = new TranslatorConfig(args);
+            var configurationBuilder = new ConfigurationBuilder();
 
-            var api = TranslateFactory.CreateApi(cfg.YandexTranslateToken);
+            var configurationRoot = configurationBuilder
+                .AddJsonFile("appsettings.json", true)
+                .AddJsonFile("appsettings.local.json", true)
+                .Build();
+                
+            var cfg = new TranslatorConfig(new TranslatorConfigProvider(args, configurationRoot));
+
+            var apiToken = cfg.YandexTranslateToken;
+            if (apiToken == null && cfg.YandexTranslateOAuthToken != null)
+            {
+                var yandexIamTokensApi = ApiFactory.CreateIamApi();
+                apiToken = await yandexIamTokensApi.CreateToken(cfg.YandexTranslateOAuthToken);
+            }
+
+            if (string.IsNullOrEmpty(apiToken))
+            {
+                Console.WriteLine("Error: Yandex Translate api token is not provided.");
+                return -2;
+            }
+
+            var api = ApiFactory.CreateTranslateApi(apiToken);
 
             var parser = new SubtitlesParser.Classes.Parsers.SrtParser();
             await using var fileStream = File.OpenRead(cfg.SourceFile);
@@ -56,7 +79,7 @@ namespace SubtitlesTranslator
 
             File.WriteAllText(destFileName, result);
 
-            Console.WriteLine($"Done. Dest file: '{destFileName}'");
+            Console.WriteLine($"Done. Destination file: '{destFileName}'");
 
             return 0;
         }

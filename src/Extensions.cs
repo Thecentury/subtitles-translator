@@ -1,5 +1,7 @@
 using System;
 using System.Globalization;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 using SubtitlesParser.Classes;
 
 namespace SubtitlesTranslator

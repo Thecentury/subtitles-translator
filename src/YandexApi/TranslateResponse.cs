@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace SubtitlesTranslator
+namespace SubtitlesTranslator.YandexApi
 {
     // ReSharper disable once ClassNeverInstantiated.Global
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]

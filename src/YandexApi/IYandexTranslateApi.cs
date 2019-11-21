@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using RestEase;
 
-namespace SubtitlesTranslator
+namespace SubtitlesTranslator.YandexApi
 {
     public interface IYandexTranslateApi
     {
