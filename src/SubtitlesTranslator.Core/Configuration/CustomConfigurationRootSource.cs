@@ -3,7 +3,7 @@ using System.Reflection;
 using Configgy.Source;
 using Microsoft.Extensions.Configuration;
 
-namespace SubtitlesTranslator.Configuration
+namespace SubtitlesTranslator.Core.Configuration
 {
     internal sealed class CustomConfigurationRootSource : ValueSourceAttributeBase
     {

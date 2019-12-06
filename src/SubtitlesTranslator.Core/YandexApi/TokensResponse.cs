@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace SubtitlesTranslator.YandexApi
+namespace SubtitlesTranslator.Core.YandexApi
 {
     public sealed class TokensResponse
     {

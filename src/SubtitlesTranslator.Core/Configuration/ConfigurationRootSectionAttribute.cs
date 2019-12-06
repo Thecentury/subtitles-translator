@@ -1,6 +1,6 @@
 using System;
 
-namespace SubtitlesTranslator.Configuration
+namespace SubtitlesTranslator.Core.Configuration
 {
     [AttributeUsage(AttributeTargets.Class)]
     internal sealed class ConfigurationRootSectionAttribute : Attribute

@@ -2,7 +2,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using RestEase;
 
-namespace SubtitlesTranslator.YandexApi
+namespace SubtitlesTranslator.Core.YandexApi
 {
     public static class ApiFactory
     {

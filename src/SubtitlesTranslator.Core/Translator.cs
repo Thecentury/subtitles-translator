@@ -1,30 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using MoreLinq;
 using SubtitlesParser.Classes;
-using SubtitlesTranslator.Configuration;
-using SubtitlesTranslator.YandexApi;
+using SubtitlesTranslator.Core.Configuration;
+using SubtitlesTranslator.Core.YandexApi;
 
-namespace SubtitlesTranslator
+namespace SubtitlesTranslator.Core
 {
-    internal static class Program
+    public class Translator
     {
-        private static async Task<int> Main(string[] args)
+        public async Task<TranslationResult> TranslateAsync(TranslatorConfig cfg)
         {
-            var configurationBuilder = new ConfigurationBuilder();
-
-            var configurationRoot = configurationBuilder
-                .AddJsonFile("appsettings.json", true)
-                .AddJsonFile("appsettings.local.json", true)
-                .Build();
-                
-            var cfg = new TranslatorConfig(new TranslatorConfigProvider(args, configurationRoot));
-
             var apiToken = cfg.YandexTranslateToken;
             if (apiToken == null && cfg.YandexTranslateOAuthToken != null)
             {
@@ -34,8 +24,7 @@ namespace SubtitlesTranslator
 
             if (string.IsNullOrEmpty(apiToken))
             {
-                Console.WriteLine("Error: Yandex Translate api token is not provided.");
-                return -2;
+                return TranslationResult.FromError("Error: Yandex Translate api token is not provided.");
             }
 
             var api = ApiFactory.CreateTranslateApi(apiToken);
@@ -68,29 +57,13 @@ namespace SubtitlesTranslator
                 }
                 catch (Exception exc)
                 {
-                    Console.WriteLine(exc);
-                    return -1;
+                    return TranslationResult.FromError(exc.ToString());
                 }
             }
 
-            var result = SubtitlesToString(items, translations);
+            var translation = SubtitlesToString(items, translations);
 
-            var destFileName = GetDestFileName(cfg);
-
-            File.WriteAllText(destFileName, result);
-
-            Console.WriteLine($"Done. Destination file: '{destFileName}'");
-
-            return 0;
-        }
-
-        private static string GetDestFileName(TranslatorConfig cfg)
-        {
-            string dir = Path.GetDirectoryName(cfg.SourceFile);
-            string fileName = Path.GetFileNameWithoutExtension(cfg.SourceFile);
-
-            string destFileName = Path.Combine(dir, $"{fileName}-translated-{cfg.TargetLanguageCode}.srt");
-            return destFileName;
+            return TranslationResult.Ok(translation);
         }
 
         private static string SubtitlesToString(IEnumerable<SubtitleItem> items,

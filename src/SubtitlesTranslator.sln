@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitlesTranslator", "SubtitlesTranslator.csproj", "{73FB65E1-EC2A-4FD0-9259-47E5C9436F56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitlesTranslator.Core", "SubtitlesTranslator.Core\SubtitlesTranslator.Core.csproj", "{C6358621-0A41-4D17-9738-E0753A10CF24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitlesTranslator", "SubtitlesTranslator\SubtitlesTranslator.csproj", "{0086A129-6B6A-42D2-BC15-89318FC29F0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +10,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{73FB65E1-EC2A-4FD0-9259-47E5C9436F56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{73FB65E1-EC2A-4FD0-9259-47E5C9436F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{73FB65E1-EC2A-4FD0-9259-47E5C9436F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{73FB65E1-EC2A-4FD0-9259-47E5C9436F56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6358621-0A41-4D17-9738-E0753A10CF24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6358621-0A41-4D17-9738-E0753A10CF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6358621-0A41-4D17-9738-E0753A10CF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6358621-0A41-4D17-9738-E0753A10CF24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0086A129-6B6A-42D2-BC15-89318FC29F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0086A129-6B6A-42D2-BC15-89318FC29F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0086A129-6B6A-42D2-BC15-89318FC29F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0086A129-6B6A-42D2-BC15-89318FC29F0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

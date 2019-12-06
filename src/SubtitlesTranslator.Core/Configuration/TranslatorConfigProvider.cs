@@ -6,9 +6,9 @@ using Configgy.Transformation;
 using Configgy.Validation;
 using Microsoft.Extensions.Configuration;
 
-namespace SubtitlesTranslator.Configuration
+namespace SubtitlesTranslator.Core.Configuration
 {
-    internal sealed class TranslatorConfigProvider : ConfigProvider
+    public sealed class TranslatorConfigProvider : ConfigProvider
     {
         public TranslatorConfigProvider(string[] commandLine, IConfigurationRoot configurationRoot) : base(
             new DictionaryCache(),

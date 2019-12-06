@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SubtitlesTranslator.YandexApi
+namespace SubtitlesTranslator.Core.YandexApi
 {
     public static class YandexIamTokensApiExtensions
     {

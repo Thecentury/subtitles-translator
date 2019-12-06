@@ -1,12 +1,12 @@
 using System.ComponentModel;
 using Configgy;
 
-namespace SubtitlesTranslator.Configuration
+namespace SubtitlesTranslator.Core.Configuration
 {
     [ConfigurationRootSection("Translator")]
     public sealed class TranslatorConfig : Config
     {
-        public TranslatorConfig(ConfigProvider configProvider) : base(configProvider)
+        public TranslatorConfig(IConfigProvider configProvider) : base(configProvider)
         {
         }
 
