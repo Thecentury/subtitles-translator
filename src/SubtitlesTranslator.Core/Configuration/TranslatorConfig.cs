@@ -16,7 +16,8 @@ namespace SubtitlesTranslator.Core.Configuration
 
         public string YandexCloudFolderId => Get<string>();
 
-        [DefaultValue("ru")] public string TargetLanguageCode => Get<string>();
+        [DefaultValue("ru")] 
+        public string TargetLanguageCode => Get<string>();
 
         public string SourceFile => Get<string>();
     }

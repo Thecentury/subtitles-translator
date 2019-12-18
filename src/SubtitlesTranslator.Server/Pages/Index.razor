@@ -1,5 +1,50 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.ProtectedBrowserStorage
+@inject ProtectedSessionStorage ProtectedSessionStore
 
-<h1>Hello, world!</h1>
+<p>
+    <label for="FolderId">Folder Id</label>
+    <input type="text" id="FolderId" @bind-value="@FolderId"/>
+</p>
+<p>
+    <label for="OAuthToken">OAuthToken</label>
+    <input type="text" id="OAuthToken" @bind-value="@OAuthToken"/>
+</p>
+<p>
+    <label for="SourceFile">File</label>
+    <InputFile OnChange="HandleFileSelected" id="SourceFile"/>
+</p>
 
-Welcome to your new app.
+<button @onclick="Translate" disabled="@(!CanProceed)">Translate</button>
+
+@code
+{
+    string FolderId { get; set; }
+    string OAuthToken { get; set; }
+    IFileListEntry SelectedFile { get; set; }
+
+    bool CanProceed
+    {
+        get { return FolderId != null && OAuthToken != null && SelectedFile != null; }
+    } 
+
+    protected override async Task OnInitializedAsync()
+    {
+        FolderId = await ProtectedSessionStore.GetAsync<string>("FolderId");
+        OAuthToken = await ProtectedSessionStore.GetAsync<string>("OAuthToken");
+    }
+
+    private async Task Translate()
+    {
+        await ProtectedSessionStore.SetAsync("FolderId", FolderId);
+        await ProtectedSessionStore.SetAsync("OAuthToken", OAuthToken);
+    }
+
+    void HandleFileSelected(IFileListEntry[] files)
+    {
+        if (files.Length > 0)
+        {
+            SelectedFile = files[0];
+        }
+    }
+}

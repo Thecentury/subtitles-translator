@@ -14,9 +14,11 @@
 </head>
 <body>
     <app>
-        @(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))
+        @(await Html.RenderComponentAsync<App>(RenderMode.Server))
     </app>
 
     <script src="_framework/blazor.server.js"></script>
+    <script src="_content/Microsoft.AspNetCore.ProtectedBrowserStorage/protectedBrowserStorage.js"></script>
+    <script src="_content/BlazorInputFile/inputfile.js"></script>
 </body>
 </html>
